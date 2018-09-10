@@ -79,7 +79,7 @@ public class StudentWindow extends javax.swing.JFrame {
                 btnSaveActionPerformed(evt);
             }
         });
-        getContentPane().add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 240, 90, 20));
+        getContentPane().add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 210, 90, 20));
 
         btnSearch.setText("Search");
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
@@ -105,7 +105,7 @@ public class StudentWindow extends javax.swing.JFrame {
                 bUpdateActionPerformed(evt);
             }
         });
-        getContentPane().add(bUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 240, 90, 20));
+        getContentPane().add(bUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 210, 90, 20));
 
         tStudents.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -125,7 +125,7 @@ public class StudentWindow extends javax.swing.JFrame {
                 btnDeleteActionPerformed(evt);
             }
         });
-        getContentPane().add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, 100, 20));
+        getContentPane().add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 100, 20));
 
         btnRefresh.setText("Refresh");
         btnRefresh.addActionListener(new java.awt.event.ActionListener() {
@@ -141,7 +141,7 @@ public class StudentWindow extends javax.swing.JFrame {
                 btnExitActionPerformed(evt);
             }
         });
-        getContentPane().add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 240, 80, 20));
+        getContentPane().add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 210, 80, 20));
 
         txtId2.setText("Id");
         getContentPane().add(txtId2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 80, 20));
@@ -164,7 +164,7 @@ public class StudentWindow extends javax.swing.JFrame {
         Student student = new Student(name, lastName);
         studentBLO.save(student);
         txtName.setText("");
-        txtLastName.setText("");
+        txtLastName.setText(""); 
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
