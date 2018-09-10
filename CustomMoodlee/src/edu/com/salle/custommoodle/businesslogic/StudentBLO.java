@@ -20,7 +20,7 @@ public class StudentBLO {
     private StudentDAO studentDAO;
     
     public StudentBLO(){
-        studentDAO = new StudentDAOListImple();
+        studentDAO =                                                                                                            new StudentDAOListImple();
     }
             
     public Student save(Student student){
@@ -32,7 +32,7 @@ public class StudentBLO {
     public Student find(String id){
         return studentDAO.find(id);
     }
-    public Student findByLastName(String lastName){
+    public List<Student> findByLastName(String lastName){// ahora va a retornar una lsita
         return studentDAO.findByLastName(lastName);
     }
     
@@ -42,5 +42,14 @@ public class StudentBLO {
     
     public void update(Student student){
         studentDAO.update(student);
+    }
+    public void load(){ //metodos para mandar a llamar
+       studentDAO.load(); 
+    }
+    public void commitChanges(){
+        studentDAO.commitChanges();
+    }
+     public List<Student> findById(String name1){// ahora va a retornar una lsita
+        return studentDAO.findById(name1);
     }
 }

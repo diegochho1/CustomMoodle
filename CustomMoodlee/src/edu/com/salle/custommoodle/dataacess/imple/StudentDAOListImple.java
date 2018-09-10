@@ -5,8 +5,13 @@
  */
 package edu.com.salle.custommoodle.dataacess.imple;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import edu.com.salle.custommoodle.dataacess.StudentDAO;
 import edu.com.salle.custommoodle.model.Student;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +26,7 @@ public class StudentDAOListImple implements StudentDAO {
     public Student save(Student student) {
             String Id = Integer.toString(studentList.size() +1);
             student.setId(Id);
-            studentList.add(student);
+            studentList.add(student); //cuando carga mete el archivo a una lista estatica 
             return student;
         }
 
@@ -41,14 +46,16 @@ public class StudentDAOListImple implements StudentDAO {
     }
 
     @Override
-    public Student findByLastName(String lastName) {
+    public List<Student> findByLastName(String lastName) {
+    List<Student> resStudentList = new ArrayList<>();
     lastName = lastName.toLowerCase().trim();
     for (Student student : studentList){
-        if(student.getLastName().toLowerCase().contains(lastName)){
-            return student;
+        if(student.getLastName().toLowerCase().
+                contains(lastName)|| student.getName().toLowerCase().contains(lastName)){
+            resStudentList.add(student); //se va a meter y todos los que hagan mach va a retornar
         }
     }
-    return null;
+    return resStudentList;
     }
 
     @Override
@@ -61,5 +68,47 @@ public class StudentDAOListImple implements StudentDAO {
        int pos = studentList.indexOf(student);//obtener la posicion
        studentList.set(pos, student);//y en esa misma posicion se le va a set (hacer el cambio)
     }
+
+    @Override
+    public void load() { //va a leer todos los studiantes y va a pasar a la libreria
+        try{
+        Gson gson = new Gson();
+        BufferedReader br =
+                new BufferedReader(new FileReader("students.json"));
+        studentList = gson.fromJson(br, new TypeToken<List<Student>>(){
+    }.getType());
+        br.close();
+        if(studentList == null){
+            studentList = new ArrayList<>();
+        }
+    } catch(Exception ex){
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void commitChanges() { //la libreria la va a convertir para guardar al final
+        try{
+            Gson gson = new Gson();
+            FileWriter writer = new FileWriter("students.json");
+            writer.write(gson.toJson(studentList));
+            writer.close();
+        } catch(Exception ex){
+            ex.printStackTrace();
+        }
+        
+    }
+
+    @Override
+    public List<Student> findById(String name1) {
+    List<Student> resStudentList = new ArrayList<>();
+    name1 = name1.toLowerCase().trim();
+    for (Student student : studentList){
+        if(student.getId().toLowerCase().
+                contains(name1)){
+            resStudentList.add(student); //se va a meter y todos los que hagan mach va a retornar
+        }
+    }
+    return resStudentList; }
 
 }
